@@ -9,12 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-// JPA интерфейс
-// Данный интерфейс предназначен для работы с таблицей users
 @Transactional(readOnly = true)
 public interface UserEntityJpa extends JpaRepository<UserEntity, Long> {
 
-    // Получаем сущность UserEntity по email
     UserEntity findUserEntityByEmail (String email);
 
 

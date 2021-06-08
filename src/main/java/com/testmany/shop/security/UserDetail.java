@@ -29,11 +29,6 @@ public class UserDetail implements UserDetailsService {
         this.serviceJpa = serviceJpa;
     }
 
-    /**
-     * @param email Имя пользователя из формы ввода данных логина
-     * @return - Возвращаем в UserDetails пользователя из БД
-     * @throws UsernameNotFoundException - Исключения
-     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
@@ -44,7 +39,7 @@ public class UserDetail implements UserDetailsService {
 
 
         if (userEntity == null){
-            throw new UsernameNotFoundException("Пользователя с таким адресом электронной почтой не существует == " + email);
+            throw new UsernameNotFoundException("UsernameNotFoundException == " + email);
         }
 
         Collection<AuthoritiesEntity> userRoles = userEntity.getAuthoritiesEntities();

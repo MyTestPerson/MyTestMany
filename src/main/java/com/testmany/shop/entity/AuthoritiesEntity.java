@@ -9,9 +9,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Authorities - Роли
- */
 @Entity(name = "AuthoritiesEntity")
 @Table(name = "authorities", schema = "testmany")
 public class AuthoritiesEntity implements Serializable{
@@ -25,7 +22,6 @@ public class AuthoritiesEntity implements Serializable{
     public AuthoritiesEntity() {
     }
 
-    // Это ID Роле
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
@@ -104,7 +100,6 @@ public class AuthoritiesEntity implements Serializable{
 
 
 
-    // Добавления пользователя к роли
     public void addUser(UserEntity userEntity) {
         userEntityList.add( userEntity );
         userEntity.getAuthoritiesEntities().add( this );

@@ -32,7 +32,6 @@ public class ServiceJpaImpl implements ServiceJpa {
         this.userEntityJpa = userEntityJpa;
     }
 
-    // Получаем сущность UserEntity по email
     @Override
     public UserEntity findUserEntityByEmail(String email) {
         return userEntityJpa.findUserEntityByEmail(email);
@@ -40,14 +39,12 @@ public class ServiceJpaImpl implements ServiceJpa {
 
 
 
-    // Сохраняем сущность AuthoritiesEntity
     @Override
     @Transactional
     public void saveAuthoritiesEntity(AuthoritiesEntity authoritiesEntity) {
         authoritiesEntityRepository.save(authoritiesEntity);
     }
 
-    // Сохраняем сущность PrivilegesEntity
     @Override
     @Transactional
     public void savePrivilegesEntity(PrivilegesEntity privilegesEntity) {
@@ -55,15 +52,10 @@ public class ServiceJpaImpl implements ServiceJpa {
     }
 
 
-    // Получаем роль по enum роли
     @Override
     public AuthoritiesEntity findAuthoritiesEntityByRoleEnum (RoleEnum roleEnum) {
         return authoritiesEntityRepository.findAuthoritiesEntityByRoleEnum(roleEnum);
     }
-//    @Override
-//    public List<AuthoritiesEntity> findAuthoritiesEntityByRoleEnum (List<RoleEnum> roleEnum) {
-//        return authoritiesEntityRepository.findAuthoritiesEntitiesByRoleEnumIn(roleEnum);
-//    }
 
     // Получаем привилегию по enum привилегии
     @Override

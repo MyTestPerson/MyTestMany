@@ -23,12 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-//        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-//    }
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
@@ -42,49 +36,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
                 .authorizeRequests()
-//                 .mvcMatchers("/", "/errors").permitAll() // permitAll Разрешает доступ всем
-                .mvcMatchers("/login", "/registration", "/newPassword", "/newPassword/{token}", "/regConfirm/{token}").anonymous() // anonymous Разрешает доступ только анонимным
+//                 .mvcMatchers("/", "/errors").permitAll()
+                .mvcMatchers("/login", "/registration", "/newPassword", "/newPassword/{token}", "/regConfirm/{token}").anonymous()
                 .mvcMatchers("/admin/ADM/**").hasRole("ADMIN")
                 .mvcMatchers("/user/**").hasRole("USER")
                 // .anyRequest().authenticated()
 
-                .and() /*.csrf().disable()*/
-                .formLogin() // Включаем страницу с формой логина
-                .loginPage("/login") // Указываем свою собственную страницу логин
-                .loginProcessingUrl("/login") // Адрес обработчика, который обрабатывает
-                                              // полученные данные для входа
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
 
                 .defaultSuccessUrl("/")
-                // Страница куда нужно перекинуть после входа.
-                // Ещё можно добавить true или false. Пример ("/", true).
-                // false - Если мы заходим в личный кабинет, то мы попадём в личный кабинет.
-                // true - Если мы заходим в личный кабинет, то мы попадём туда, куда указали.
 
 
 
-                // Расширенная настройка
                  .failureUrl("/login")
-                // По умолчанию если указали не верный логин или пароль,
-                // то возвращается та-же страница с параметром error.
-                // Тут можно указать свое значение в параметре, например true
 
 
 
                 .and()
-                .logout() // Включаем процесс выхода
+                .logout()
                 // .permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/logout","POST"))
                 .permitAll()
 
-                .logoutUrl("/logout") // Адрес обработчика, который обрабатывает полученные данные для выхода
-                // не обязательно иметь GetMapping POST метод контроллер
+                .logoutUrl("/logout")
 
 
-                // Расширенная настройка
                 .logoutSuccessUrl("/")
-                // Страница куда нужно перекинуть после выхода
 
-                .invalidateHttpSession(true) // После выхода из системы, делает сессию не действительной
-                .deleteCookies("JSESSIONID"); // Удаляет куки;
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID");
     }
 
 

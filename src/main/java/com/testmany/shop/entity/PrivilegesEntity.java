@@ -77,7 +77,6 @@ public class PrivilegesEntity implements Serializable {
 
 
 
-    // Добавления пользователя к роли
     public void addAuthority(AuthoritiesEntity authoritiesEntity) {
         authoritiesEntityList.add( authoritiesEntity );
         authoritiesEntity.getPrivilegesEntities().add( this );

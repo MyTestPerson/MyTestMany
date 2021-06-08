@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Сущность пользователя
- */
 @Entity(name = "UserEntity")
 @Table(name = "users", schema = "testmany")
 public class UserEntity implements Serializable {
@@ -25,7 +22,6 @@ public class UserEntity implements Serializable {
     public UserEntity() {
     }
 
-    // Это ID пользователя
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
@@ -81,12 +77,6 @@ public class UserEntity implements Serializable {
 
 
 
-//    public void addNotActivatedUsersEntity(NotActivatedUsersEntity notActivatedUsersEntity) {
-//        notActivatedUsersEntity.setUserEntity( this );
-//        this.notActivatedUsersEntity = notActivatedUsersEntity;
-//    }
-//
-//
 
 
     @Override
