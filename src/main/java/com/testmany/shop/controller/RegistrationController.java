@@ -68,7 +68,7 @@ public class RegistrationController {
         AuthoritiesEntity authoritiesEntity = serviceJpa.findAuthoritiesEntityByRoleEnum(RoleEnum.ROLE_USER);
 
         privilegesEntity.addAuthority(authoritiesEntity);
-//        authoritiesEntity.addUser(userEntity);
+        authoritiesEntity.addUser(userEntity);
 
         serviceJpa.savePrivilegesEntity(privilegesEntity);
 

@@ -18,7 +18,7 @@ public class AuthoritiesEntity implements Serializable{
 
     private Long id;
     private String authority;
-//    private Collection<UserEntity> userEntityList = new ArrayList<>();
+    private Collection<UserEntity> userEntityList = new ArrayList<>();
     private Collection<PrivilegesEntity> privilegesEntities = new ArrayList<>();
     private RoleEnum roleEnum;
 
@@ -62,16 +62,16 @@ public class AuthoritiesEntity implements Serializable{
 
 
 
-    
 
-//    @ManyToMany(mappedBy = "authoritiesEntities", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-//    public Collection<UserEntity> getUserEntityList() {
-//        return userEntityList;
-//    }
-//
-//    public void setUserEntityList(Collection<UserEntity> userEntityList) {
-//        this.userEntityList = userEntityList;
-//    }
+
+    @ManyToMany(mappedBy = "authoritiesEntities", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    public Collection<UserEntity> getUserEntityList() {
+        return userEntityList;
+    }
+
+    public void setUserEntityList(Collection<UserEntity> userEntityList) {
+        this.userEntityList = userEntityList;
+    }
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     public Collection<PrivilegesEntity> getPrivilegesEntities() {
@@ -105,10 +105,11 @@ public class AuthoritiesEntity implements Serializable{
 
 
     // Добавления пользователя к роли
-//    public void addUser(UserEntity userEntity) {
-//        userEntityList.add( userEntity );
-//        userEntity.getAuthoritiesEntities().add( this );
-//    }
+    public void addUser(UserEntity userEntity) {
+        userEntityList.add( userEntity );
+        userEntity.getAuthoritiesEntities().add( this );
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -119,6 +120,7 @@ public class AuthoritiesEntity implements Serializable{
 
         if (!getId().equals(that.getId())) return false;
         if (!getAuthority().equals(that.getAuthority())) return false;
+        if (!getUserEntityList().equals(that.getUserEntityList())) return false;
         if (!getPrivilegesEntities().equals(that.getPrivilegesEntities())) return false;
         return getRoleEnum() == that.getRoleEnum();
     }
@@ -127,33 +129,9 @@ public class AuthoritiesEntity implements Serializable{
     public int hashCode() {
         int result = getId().hashCode();
         result = 31 * result + getAuthority().hashCode();
+        result = 31 * result + getUserEntityList().hashCode();
         result = 31 * result + getPrivilegesEntities().hashCode();
         result = 31 * result + getRoleEnum().hashCode();
         return result;
     }
-
-
-    //    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof AuthoritiesEntity)) return false;
-//
-//        AuthoritiesEntity that = (AuthoritiesEntity) o;
-//
-//        if (!getId().equals(that.getId())) return false;
-//        if (!getAuthority().equals(that.getAuthority())) return false;
-//        if (!getUserEntityList().equals(that.getUserEntityList())) return false;
-//        if (!getPrivilegesEntities().equals(that.getPrivilegesEntities())) return false;
-//        return getRoleEnum() == that.getRoleEnum();
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int result = getId().hashCode();
-//        result = 31 * result + getAuthority().hashCode();
-//        result = 31 * result + getUserEntityList().hashCode();
-//        result = 31 * result + getPrivilegesEntities().hashCode();
-//        result = 31 * result + getRoleEnum().hashCode();
-//        return result;
-//    }
 }
