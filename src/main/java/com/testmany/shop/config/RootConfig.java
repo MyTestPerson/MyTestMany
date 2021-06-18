@@ -70,7 +70,7 @@ public class RootConfig implements WebMvcConfigurer{
         properties.put(Environment.HBM2DDL_AUTO, Action.CREATE_DROP); // "create-drop"
         properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
         properties.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-
+//        properties.put(Environment.ENABLE_LAZY_LOAD_NO_TRANS, "true");
         return properties;
     }
 
